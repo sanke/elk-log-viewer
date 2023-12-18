@@ -1,0 +1,6 @@
+@MDP.LogViewer.Service_HostAddress = http://localhost:5087
+
+GET {{MDP.LogViewer.Service_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
