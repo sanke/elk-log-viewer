@@ -1,12 +1,12 @@
 <p-card>
+  <div style="margin-bottom: 1rem">
+    <p-button label="Clear logs" icon="pi pi-times" (onClick)="clearExisting()"></p-button>
+  </div>
   <p-fileUpload mode="advanced" chooseLabel="Choose" name="files" [multiple]="true"
                 url="/api/v1/files/upload"
                 accept=".log, .txt, .zip" (onUpload)="onUpload($event)">
 
     <ng-template pTemplate="content">
-      <ul>
-        <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
-      </ul>
       <div class="text">
         <h4>Drag & drop log files or paste (TBD)</h4>
         <div>

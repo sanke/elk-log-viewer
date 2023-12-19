@@ -1,3 +1,4 @@
+using MDP.LogViewer.Service;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+builder.Services.AddTransient<ElasticManager>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(

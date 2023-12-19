@@ -23,8 +23,6 @@ FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "MDP.LogViewer.Service.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
-FROM mdp-logviewer-client as client
-
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .

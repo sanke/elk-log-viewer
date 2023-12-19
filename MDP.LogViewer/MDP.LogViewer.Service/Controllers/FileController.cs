@@ -9,11 +9,13 @@ namespace MDP.LogViewer.Service.Controllers;
 [ApiController]
 public partial class FileController : ControllerBase
 {
+    private readonly ElasticManager _elasticManager;
     private readonly string _host;
     public const int DateLength = 8;
 
-    public FileController(IConfiguration configuration)
+    public FileController(IConfiguration configuration, ElasticManager elasticManager)
     {
+        _elasticManager = elasticManager;
         _host = configuration.GetValue<string>("ServiceHost", "localhost")!;
     }
 
@@ -24,6 +26,14 @@ public partial class FileController : ControllerBase
         using var client = new TcpClient(_host, 50000);
         var bytes = Encoding.UTF8.GetBytes(text);
         await client.GetStream().WriteAsync(bytes, 0, bytes.Length);
+        return Ok();
+    }
+    
+    [HttpDelete]
+    [Route("/api/v1/clear")]
+    public async Task<IActionResult> Clear()
+    {
+        await _elasticManager.ClearAsync();
         return Ok();
     }
 

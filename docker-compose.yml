@@ -113,6 +113,7 @@ services:
     environment:
       ASPNETCORE_URLS: http://+:5087
       ServiceHost: logstash
+      ElkHost: elasticsearch
     networks:
       - elk
     ports:
